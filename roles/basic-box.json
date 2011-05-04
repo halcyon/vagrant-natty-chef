@@ -6,10 +6,15 @@
   "env_run_lists": {
   },
   "run_list": [
-    "recipe[build-essential::default]"
+    "recipe[rvm]",
+    "recipe[mysql]",
+    "recipe[activemq]"
   ],
   "description": "",
   "chef_type": "role",
   "override_attributes": {
+    "rvm": {
+      "rubies": ["1.9.2"]
+    }
   }
 }

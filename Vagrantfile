@@ -66,11 +66,10 @@ Vagrant::Config.run do |config|
   #
   #
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "cookbooks"
+    chef.cookbooks_path = ["cookbooks"]
     chef.roles_path = "roles"
     chef.add_role "basic-box"
-    chef.add_role "stuff"
-    chef.log_level = :debug
+    chef.log_level = :info
   end
 
      # You may also specify custom JSON attributes:
