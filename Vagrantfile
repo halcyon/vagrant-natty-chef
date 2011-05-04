@@ -4,7 +4,7 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "vagrant-natty-amd64-05-01-2011"
+  config.vm.box = "vagrant-natty-amd64-05-04-2011"
 
   config.vm.forward_port("web", 80, 8080, :auto => true)
   config.vm.forward_port("mysql", 3306, 3306, :auto => true)
@@ -12,7 +12,7 @@ Vagrant::Config.run do |config|
     vm.memory_size = 2048
   end
 
-  config.vm.box_url = "http://irulan.homeunix.net/vagrant-natty-amd64-05-01-2011.box"
+  config.vm.box_url = "http://irulan.homeunix.net/vagrant-natty-amd64-05-04-2011.box"
 
   #config.vm.provision :puppet, :module_path => ["example42","modules"] , :manifests_path => "manifests" , :manifest_file => "site.pp", :options => "--debug"
 #  config.vm.provision :puppet, :module_path => "modules" , :manifests_path => "manifests" , :manifest_file => "site.pp", :options => "--trace -d"
