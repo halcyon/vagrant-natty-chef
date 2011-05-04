@@ -8,7 +8,8 @@
   "run_list": [
     "recipe[rvm]",
     "recipe[mysql]",
-    "recipe[activemq]"
+    "recipe[activemq]",
+    "recipe[nginx_passenger]"
   ],
   "description": "",
   "chef_type": "role",

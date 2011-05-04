@@ -1,3 +1,0 @@
-[submodule "cookbooks/rvm"]
-	path = cookbooks/rvm
-	url = https://github.com/papercavalier/rvm-cookbook.git
