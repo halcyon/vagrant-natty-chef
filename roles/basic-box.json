@@ -7,6 +7,7 @@
   },
   "run_list": [
     "recipe[rvm]",
+    "recipe[redmine]",
     "recipe[mysql]",
     "recipe[activemq]",
     "recipe[nginx_passenger]"
