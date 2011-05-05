@@ -24,6 +24,16 @@ rvm_gem "sqlite3" do
   action :install
 end
 
+directory "/opt/nginx/conf/sites" do
+  recursive true
+  action :create
+end
+
+directory "/websites/phusion" do
+  recursive true
+  action :create
+end
+
 template "/opt/nginx/conf/sites/#{site}.conf" do
   source "site.conf.erb"
   notifies :restart, 'service[nginx]'
