@@ -7,10 +7,9 @@
   },
   "run_list": [
     "recipe[rvm]",
-    "recipe[redmine]",
-    "recipe[mysql]",
-    "recipe[activemq]",
-    "recipe[nginx_passenger]"
+    "recipe[mysql::server]",
+    "recipe[nginx_passenger]",
+    "recipe[redmine]"
   ],
   "description": "",
   "chef_type": "role",
@@ -19,7 +18,10 @@
       "rubies": "ree-1.8.7"
     },
     "nginx": {
-      "site": "jesus"
+      "site": "redmine"
+    },
+    "mysql": {
+      "server_root_password": "vagrant"
     }
   }
 }
