@@ -41,13 +41,6 @@ bash "install rvm" do
   creates "/usr/local/bin/rvm"
 end
 
-cookbook_file "/etc/profile.d/rvm_profile.sh" do
-  source "rvm_profile.sh"
-  owner "root"
-  group "root"
-  mode "0755"
-end
-
 rubies = node[:rvm][:rubies].split(" ")
 default_ruby = rubies.first
 

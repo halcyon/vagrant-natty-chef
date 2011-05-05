@@ -15,7 +15,7 @@
   "chef_type": "role",
   "override_attributes": {
     "rvm": {
-      "rubies": "ruby-1.9.2"
+      "rubies": "ree-1.8.7"
     }
   }
 }
