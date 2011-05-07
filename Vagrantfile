@@ -4,7 +4,7 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "vagrant-natty-amd64-05-04-2011"
+  config.vm.box = "vagrant-natty-amd64-ruby-05-06-2011"
 
   config.vm.forward_port("web", 80, 8080, :auto => true)
   config.vm.forward_port("mysql", 3306, 3306, :auto => true)
@@ -12,7 +12,7 @@ Vagrant::Config.run do |config|
     vm.memory_size = 2048
   end
 
-  config.vm.box_url = "http://irulan.homeunix.net/vagrant-natty-amd64-05-04-2011.box"
+  config.vm.box_url = "http://irulan.homeunix.net/vagrant-natty-amd64-ruby-05-06-2011.box"
 
   #config.vm.provision :puppet, :module_path => ["example42","modules"] , :manifests_path => "manifests" , :manifest_file => "site.pp", :options => "--debug"
 #  config.vm.provision :puppet, :module_path => "modules" , :manifests_path => "manifests" , :manifest_file => "site.pp", :options => "--trace -d"
@@ -62,15 +62,14 @@ Vagrant::Config.run do |config|
   # end
 
   # Enable provisioning with chef solo, specifying a cookbooks path (relative
-  # to this Vagrantfile), and adding some recipes and/or roles.
+  # to this Vagrantfile), and adding some recipes and/or roles.  #
   #
-  #
-  config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = ["cookbooks"]
-    chef.roles_path = "roles"
-    chef.add_role "basic-box"
-    chef.log_level = :info
-  end
+  #config.vm.provision :chef_solo do |chef|
+  #  chef.cookbooks_path = ["cookbooks"]
+  #  chef.roles_path = "roles"
+  #  chef.add_role "basic-box"
+  #  chef.log_level = :info
+  #end
 
      # You may also specify custom JSON attributes:
   #   chef.json.merge!({ :mysql_password => "foo" })
@@ -97,4 +96,9 @@ Vagrant::Config.run do |config|
   # chef-validator, unless you changed the configuration.
   #
   #   chef.validation_client_name = "ORGNAME-validator"
+  config.vm.provision :chef_server do |chef|
+    chef.node_name = "zorrander"
+    chef.chef_server_url = "http://192.168.1.92:4000"
+    chef.validation_key_path = "zorrander.pem"
+  end
 end
