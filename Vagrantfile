@@ -6,7 +6,7 @@ Vagrant::Config.run do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "vagrant-natty-amd64-ruby-05-06-2011"
 
-  config.vm.forward_port("web", 80, 8080, :auto => true)
+  config.vm.forward_port("web", 8080, 8080, :auto => true)
   config.vm.forward_port("mysql", 3306, 3306, :auto => true)
   config.vm.customize do |vm|
     vm.memory_size = 2048
@@ -98,7 +98,7 @@ Vagrant::Config.run do |config|
   #   chef.validation_client_name = "ORGNAME-validator"
   config.vm.provision :chef_server do |chef|
     chef.node_name = "zorrander"
-    chef.chef_server_url = "http://192.168.1.92:4000"
-    chef.validation_key_path = "zorrander.pem"
+    chef.chef_server_url = "http://irulan.homeunix.net:4000"
+    chef.validation_key_path = "~/.chef/validation.pem"
   end
 end
