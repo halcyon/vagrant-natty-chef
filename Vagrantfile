@@ -97,8 +97,8 @@ Vagrant::Config.run do |config|
   #
   #   chef.validation_client_name = "ORGNAME-validator"
   config.vm.provision :chef_server do |chef|
-    chef.node_name = "zorrander"
-    chef.chef_server_url = "http://irulan.homeunix.net:4000"
+    chef.node_name = "redmine"
+    chef.chef_server_url = "http://10.3.102.31:4000"
     chef.validation_key_path = "~/.chef/validation.pem"
   end
 end
