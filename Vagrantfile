@@ -6,8 +6,8 @@ Vagrant::Config.run do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "vagrant-natty-amd64-ruby-05-06-2011"
 
-  config.vm.forward_port("web", 8080, 8080, :auto => true)
-  config.vm.forward_port("mysql", 3306, 3306, :auto => true)
+  config.vm.forward_port("web", 3000, 8080, :auto => true)
+#  config.vm.forward_port("mysql", 3306, 3306, :auto => true)
   config.vm.customize do |vm|
     vm.memory_size = 2048
   end
