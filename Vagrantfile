@@ -4,27 +4,22 @@ Vagrant::Config.run do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "vagrant-natty-amd64-ruby-05-06-2011"
+  config.vm.box = "vagrant-natty-amd64-ruby-05-19-2011"
+  config.vm.box_url = "http://www.zeddworks.com/vagrant-natty-amd64-rvm-05-19-2011.box"
 
-  config.vm.forward_port("web", 3000, 8080, :auto => true)
-#  config.vm.forward_port("mysql", 3306, 3306, :auto => true)
+  config.vm.forward_port "web", 3000, 8080, :auto => true
+
   config.vm.customize do |vm|
     vm.memory_size = 2048
   end
 
-  config.vm.box_url = "http://irulan.homeunix.net/vagrant-natty-amd64-ruby-05-06-2011.box"
-
-  #config.vm.provision :puppet, :module_path => ["example42","modules"] , :manifests_path => "manifests" , :manifest_file => "site.pp", :options => "--debug"
-#  config.vm.provision :puppet, :module_path => "modules" , :manifests_path => "manifests" , :manifest_file => "site.pp", :options => "--trace -d"
-#  config.vm.provision :puppet, :module_path => "modules" , :manifests_path => "manifests" , :manifest_file => "site.pp"
   config.vm.share_folder "v-data", "/vagrant_data", "data"
 
-
-
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
-  # config.vm.box_url = "http://domain.com/path/to/above.box"
-  # config.vm.box_url = "http://irulan.homeunix.net/ubuntu-11.04-server-amd64.box"
+  config.vm.provision :chef_server do |chef|
+    chef.node_name = "redmine"
+    chef.chef_server_url = "http://zeddworks.com:4000"
+    chef.validation_key_path = "#{ENV['HOME']}/.chef/validation.pem"
+  end
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
@@ -33,19 +28,11 @@ Vagrant::Config.run do |config|
   # via the IP.
   # config.vm.network "33.33.33.10"
 
-  # Forward a port from the guest to the host, which allows for outside
-  # computers to access the VM, whereas host only networking does not.
-  # config.vm.forward_port "http", 80, 8080
-
-  # Share an additional folder to the guest VM. The first argument is
-  # an identifier, the second is the path on the guest to mount the
-  # folder, and the third is the path on the host to the actual folder.
-  # config.vm.share_folder "v-data", "/vagrant_data", "../data"
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
-  # the file ubuntu-11.04-server-amd64.pp in the manifests_path directory.
+  # the file vagrant-natty-amd64-ruby-05-19-2011.pp in the manifests_path directory.
   #
   # An example Puppet manifest to provision the message of the day:
   #
@@ -58,21 +45,20 @@ Vagrant::Config.run do |config|
   #
   # config.vm.provision :puppet do |puppet|
   #   puppet.manifests_path = "manifests"
-  #   puppet.manifest_file  = "ubuntu-11.04-server-amd64.pp"
+  #   puppet.manifest_file  = "vagrant-natty-amd64-ruby-05-19-2011.pp"
   # end
 
   # Enable provisioning with chef solo, specifying a cookbooks path (relative
-  # to this Vagrantfile), and adding some recipes and/or roles.  #
+  # to this Vagrantfile), and adding some recipes and/or roles.
   #
-  #config.vm.provision :chef_solo do |chef|
-  #  chef.cookbooks_path = ["cookbooks"]
-  #  chef.roles_path = "roles"
-  #  chef.add_role "basic-box"
-  #  chef.log_level = :info
-  #end
-
-     # You may also specify custom JSON attributes:
+  # config.vm.provision :chef_solo do |chef|
+  #   chef.cookbooks_path = "cookbooks"
+  #   chef.add_recipe "mysql"
+  #   chef.add_role "web"
+  #
+  #   # You may also specify custom JSON attributes:
   #   chef.json.merge!({ :mysql_password => "foo" })
+  # end
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).
@@ -96,9 +82,4 @@ Vagrant::Config.run do |config|
   # chef-validator, unless you changed the configuration.
   #
   #   chef.validation_client_name = "ORGNAME-validator"
-  config.vm.provision :chef_server do |chef|
-    chef.node_name = "redmine"
-    chef.chef_server_url = "http://10.3.102.31:4000"
-    chef.validation_key_path = "~/.chef/validation.pem"
-  end
 end
